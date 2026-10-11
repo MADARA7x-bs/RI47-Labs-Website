@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f7f5">
+  <title>Admin — RI 47 Labs</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="admin-page">
+  <header class="site-header"><a class="brand" href="./"><span class="brand-mark">47</span><span>RI 47 <b>LABS</b></span></a><a class="text-link" href="./">← View website</a></header>
+  <main class="admin-wrap">
+    <section id="login-panel" class="login-panel">
+      <p class="eyebrow">PRIVATE WORKSPACE</p><h1>Admin sign in</h1><p class="muted">Sign in with the admin account configured during setup.</p>
+      <form id="login-form" class="admin-form">
+        <label>Email<input id="login-email" type="email" autocomplete="username" required placeholder="you@example.com"></label>
+        <label>Password<input id="login-password" type="password" autocomplete="current-password" required placeholder="Your password"></label>
+        <button class="button button-dark full-width" type="submit">Sign in <span>→</span></button>
+        <p id="login-message" class="form-message" role="status"></p>
+      </form>
+    </section>
+
+    <section id="dashboard" class="dashboard hidden">
+      <div class="dashboard-top"><div><p class="eyebrow">PRIVATE WORKSPACE</p><h1>Release dashboard</h1><p class="muted">Create projects and manage their public release information.</p></div><button id="sign-out" class="button button-outline">Sign out</button></div>
+      <div class="admin-columns">
+        <section class="admin-card"><div class="card-heading"><h2 id="form-heading">Add a project</h2><span class="small-label">PROJECT DETAILS</span></div>
+          <form id="project-form" class="admin-form">
+            <input type="hidden" id="project-id">
+            <label>Project name *<input id="project-name" required maxlength="90" placeholder="e.g. TeleStream"></label>
+            <label>Short description *<textarea id="project-description" required rows="3" maxlength="280" placeholder="What does this app do?"></textarea></label>
+            <div class="form-row"><label>Platform<select id="project-platform"><option>Android</option><option>Web</option><option>Windows</option><option>Cross-platform</option><option>Other</option></select></label><label>Category<input id="project-category" maxlength="50" placeholder="Media player"></label></div>
+            <div class="form-row"><label>Current version<input id="project-version" maxlength="30" placeholder="1.0.0"></label><label>Release date<input id="project-date" type="date"></label></div>
+            <label>App icon URL<input id="project-icon" type="url" placeholder="https://… (optional)"></label>
+            <label>Website / project URL<input id="project-url" type="url" placeholder="https://… (optional)"></label>
+            <label>Download URL *<input id="project-download" type="url" required placeholder="GitHub Release or direct APK URL"></label>
+            <label>Changelog / release notes<textarea id="project-changelog" rows="4" placeholder="• What’s new in this version?"></textarea></label>
+            <label class="check-label"><input id="project-featured" type="checkbox"> Feature this project on the homepage</label>
+            <div class="form-actions"><button class="button button-dark" type="submit" id="save-project">Publish project <span>→</span></button><button class="button button-outline hidden" type="button" id="cancel-edit">Cancel edit</button></div>
+            <p id="project-message" class="form-message" role="status"></p>
+          </form>
+        </section>
+        <section class="admin-card"><div class="card-heading"><h2>Published projects</h2><span class="small-label" id="admin-count">0 ITEMS</span></div><div id="admin-project-list" class="admin-project-list"><p class="muted">Loading…</p></div></section>
+      </div>
+      <p class="admin-security-note">Security note: the dashboard is protected by Supabase Auth and database policies. Do not share your admin password or service-role key. Never place a service-role key in this website.</p>
+    </section>
+    <div id="admin-config-warning" class="config-warning hidden"><b>Setup required</b><p>Add your Supabase project URL and anon/publishable key in <code>config.js</code>, then apply the SQL in <code>supabase-schema.sql</code>. Follow README.md.</p></div>
+  </main>
+  <footer class="site-footer wrap"><span>RI 47 Labs · Admin</span><span>Private release management</span></footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
